@@ -1,0 +1,96 @@
+# Step 5: News Selection and Categorization Prompt
+# Model: gemini-2.5-flash-lite
+
+system_prompt: |
+  You are an expert AI news curator.
+  Your task is to categorize news items and score them by importance.
+
+user_prompt: |
+  Categorize and score {num_news} AI news items. Be selective - we only publish top news (score ≥6.0).
+
+  ---
+
+  **News to Evaluate** ({num_news} items):
+  {news_formatted}
+
+  ---
+
+  **Categories Available**:
+  {categories_description}
+
+  ---
+
+  ## Scoring Guidelines (0.0-10.0)
+
+  **Score 9.0-10.0** - Major impact:
+  - Major model releases (GPT-5, Claude 4, Llama 4)
+  - Breakthrough research papers with significant results
+  - Critical regulations or policy decisions
+  - Major company acquisitions (>$100M)
+
+  **Score 7.0-8.9** - High importance:
+  - Company acquisitions/deals, funding rounds
+  - Product launches from major companies
+  - Lawsuits, partnerships, leadership changes
+  - Important research findings
+
+  **Score 6.0-6.9** - Notable:
+  - Specific research findings
+  - Feature releases from established products
+  - Regulatory developments
+  - Industry announcements
+
+  **Score 4.0-5.9** - Minor interest:
+  - Smaller announcements
+  - Minor updates
+  - Less significant partnerships
+
+  **Score 0.0-3.9** - Low relevance:
+  - Very minor news
+  - Low-impact announcements
+
+  ---
+
+  ## Evaluation Factors
+
+  Consider these weights when scoring:
+  - **Recency**: {recency_weight} - Newer is better
+  - **Source Priority**: {source_priority_weight} - Specialized feeds > generalist
+  - **Content Quality**: {content_quality_weight} - Multi-article clusters > singletons
+  - **Engagement Potential**: {engagement_weight} - Trending topics, major names
+
+  ---
+
+  ## Guidelines
+
+  1. **Be selective**: Most news should score 4-7
+  2. **Reserve 8+**: Only for genuinely important events
+  3. **Use full range**: Don't cluster around 7-8
+  4. **Quality threshold**: We only publish news scoring ≥6.0
+  5. **Each news gets ONE category** (best fit)
+
+  ---
+
+  ## Output Format
+
+  Return JSON with categorized_news array:
+
+  ```json
+  {
+    "categorized_news": [
+      {
+        "news_id": "news-abc123",
+        "category": "model_release",
+        "importance_score": 8.5,
+        "reasoning": "Major model release from leading company (max 300 chars)"
+      }
+    ],
+    "rationale": "Brief explanation of categorization strategy"
+  }
+  ```
+
+  **Requirements**:
+  - Each news gets exactly one category
+  - Scores must be realistic (use full 0-10 range)
+  - Reasoning should be specific and concise (max 300 chars)
+  - Be critical: not all news is equally important

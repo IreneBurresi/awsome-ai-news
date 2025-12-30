@@ -1,0 +1,325 @@
+# RSS Feeds Configuration
+# Each feed can be marked as 'specialized' (AI-focused) or 'generalist' (broader tech news)
+# Generalist feeds support keyword filtering
+
+feeds:
+  # Specialized AI Feeds - Direct AI content sources
+  - name: "OpenAI News"
+    url: "https://openai.com/news/rss.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 10
+
+  - name: "Google Gemini Blog"
+    url: "https://blog.google/products/gemini/rss/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 10
+
+  - name: "Google AI Blog"
+    url: "https://blog.google/technology/ai/rss/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 10
+
+  - name: "Futurism AI"
+    url: "https://futurism.com/category/artificial-intelligence/feed"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  - name: "NY Times AI"
+    url: "https://www.nytimes.com/svc/collections/v1/publish/https://www.nytimes.com/spotlight/artificial-intelligence/rss.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  - name: "The Guardian AI"
+    url: "https://www.theguardian.com/technology/artificialintelligenceai/rss"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  - name: "Politico AI"
+    url: "https://www.politico.eu/tag/artificial-intelligence/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  - name: "AI News"
+    url: "https://www.artificialintelligence-news.com/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  # MIT AI News - Removed: 403 Forbidden error
+  # - name: "MIT AI News"
+  #   url: "https://news.mit.edu/topic/mitartificial-intelligence2-rss.xml"
+  #   feed_type: "specialized"
+  #   enabled: true
+  #   priority: 9
+
+  - name: "Financial Times AI"
+    url: "https://www.ft.com/artificial-intelligence?format=rss"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  - name: "Times of AI"
+    url: "https://www.timesofai.com/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  - name: "Google DeepMind"
+    url: "https://deepmind.google/blog/rss.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 10
+
+  - name: "Hugging Face Blog"
+    url: "https://huggingface.co/blog/feed.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  - name: "Ars Technica AI"
+    url: "https://arstechnica.com/ai/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  - name: "IEEE Spectrum AI"
+    url: "https://spectrum.ieee.org/feeds/topic/artificial-intelligence.rss"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  # Generalist Tech Feeds with AI Filtering
+  - name: "TechCrunch"
+    url: "https://techcrunch.com/feed/"
+    feed_type: "generalist"
+    enabled: true
+    priority: 7
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "ai"
+        - "artificial intelligence"
+        - "machine learning"
+        - "deep learning"
+        - "neural network"
+        - "LLM"
+        - "large language model"
+        - "generative AI"
+        - "transformer"
+        - "GPT"
+        - "ChatGPT"
+        - "Gemini"
+        - "Claude"
+        - "OpenAI"
+        - "Anthropic"
+      whitelist_categories:
+        - "AI"
+        - "Artificial Intelligence"
+      blacklist_keywords:
+        - "crypto"
+        - "cryptocurrency"
+        - "bitcoin"
+        - "NFT"
+
+  - name: "Euronews"
+    url: "https://www.euronews.com/rss"
+    feed_type: "generalist"
+    enabled: true
+    priority: 6
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "artificial intelligence"
+        - "machine learning"
+        - "ai"
+        - "ChatGPT"
+        - "Gemini"
+        - "Claude"
+        - "OpenAI"
+        - "Anthropic"
+
+
+  - name: "EU Observer"
+    url: "https://euobserver.com/rss"
+    feed_type: "generalist"
+    enabled: true
+    priority: 6
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "artificial intelligence"
+        - "machine learning"
+        - "ChatGPT"
+        - "Gemini"
+        - "Claude"
+        - "OpenAI"
+        - "Anthropic"
+
+  - name: "VentureBeat"
+    url: "https://venturebeat.com/feed"
+    feed_type: "generalist"
+    enabled: true
+    priority: 7
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "artificial intelligence"
+        - "machine learning"
+        - "deep learning"
+        - "LLM"
+        - "GPT"
+        - "ChatGPT"
+        - "generative AI"
+      blacklist_keywords:
+        - "crypto"
+        - "cryptocurrency"
+        - "bitcoin"
+
+  - name: "MIT Technology Review"
+    url: "https://www.technologyreview.com/feed"
+    feed_type: "generalist"
+    enabled: true
+    priority: 8
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "artificial intelligence"
+        - "machine learning"
+        - "deep learning"
+        - "neural"
+        - "algorithm"
+
+  - name: "Wired"
+    url: "https://www.wired.com/feed/rss"
+    feed_type: "generalist"
+    enabled: true
+    priority: 7
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "artificial intelligence"
+        - "machine learning"
+        - "ChatGPT"
+        - "LLM"
+        - "OpenAI"
+        - "Google AI"
+      blacklist_keywords:
+        - "crypto"
+        - "cryptocurrency"
+
+  # Additional AI Companies and Research
+  - name: "NVIDIA AI Blog"
+    url: "https://blogs.nvidia.com/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  - name: "Google Research Blog"
+    url: "https://blog.research.google/feeds/posts/default"
+    feed_type: "specialized"
+    enabled: true
+    priority: 10
+
+  - name: "AI Business"
+    url: "https://aibusiness.com/rss.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  # Community and Forums
+  - name: "Hacker News Best"
+    url: "https://hnrss.org/best"
+    feed_type: "generalist"
+    enabled: true
+    priority: 7
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "GPT"
+        - "LLM"
+        - "machine learning"
+        - "OpenAI"
+        - "Anthropic"
+        - "ChatGPT"
+        - "Claude"
+        - "Gemini"
+        - "transformer"
+      blacklist_keywords:
+        - "crypto"
+        - "cryptocurrency"
+        - "bitcoin"
+
+  - name: "AI Alignment Forum"
+    url: "https://www.alignmentforum.org/feed.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  - name: "LessWrong AI"
+    url: "https://www.lesswrong.com/feed.xml?view=community-rss&karmaThreshold=30"
+    feed_type: "specialized"
+    enabled: true
+    priority: 7
+
+  # Newsletters and Analysis
+  - name: "Import AI (Jack Clark)"
+    url: "https://jack-clark.net/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  # Policy and Regulation
+  - name: "EU AI Act News"
+    url: "https://artificialintelligenceact.eu/feed/"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  - name: "Stanford HAI"
+    url: "https://hai.stanford.edu/news/rss.xml"
+    feed_type: "specialized"
+    enabled: true
+    priority: 9
+
+  - name: "AI Now Institute"
+    url: "https://ainowinstitute.org/feed"
+    feed_type: "specialized"
+    enabled: true
+    priority: 8
+
+  # Startup and Business
+  - name: "Y Combinator Blog"
+    url: "https://www.ycombinator.com/blog/rss/"
+    feed_type: "generalist"
+    enabled: true
+    priority: 7
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "machine learning"
+        - "LLM"
+        - "ChatGPT"
+        - "startup"
+
+  # International Coverage
+  - name: "SCMP Technology"
+    url: "https://www.scmp.com/rss/91/feed"
+    feed_type: "generalist"
+    enabled: true
+    priority: 7
+    filter:
+      whitelist_keywords:
+        - "AI"
+        - "artificial intelligence"
+        - "machine learning"
+        - "Baidu"
+        - "Alibaba"
+        - "Tencent"
+        - "China AI"

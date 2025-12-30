@@ -1,0 +1,53 @@
+# Step 3: News Clustering Prompt
+# Model: gemini-2.5-flash-lite
+
+system_prompt: |
+  You are an AI news clustering system.
+  Your task is to identify CONCRETE NEWS EVENTS and group articles reporting the SAME specific event.
+
+user_prompt: |
+  **Input Articles** ({num_articles} articles):
+  {articles_formatted}
+
+  **CRITICAL: What is a "NEWS EVENT"?**
+  ✅ CONCRETE NEWS (cluster these):
+  - Product/model releases (e.g., "GPT-5 released", "New Claude version")
+  - Company announcements (funding rounds, acquisitions, partnerships, lawsuits)
+  - Research breakthroughs (specific papers, discoveries, benchmarks)
+  - Policy/regulation (new laws, bans, regulatory decisions)
+  - Leadership changes, hirings, departures
+  - Specific incidents, outages, security breaches
+
+  ❌ NOT NEWS (DO NOT cluster, mark as singletons):
+  - Generic opinion pieces or editorials without specific events
+  - Philosophical discussions about AI ethics/future (without concrete policy/event)
+  - General trend analysis ("AI is transforming X") without specific announcements
+  - Future predictions or forecasts without hard news
+  - How-to guides, tutorials, explainers
+
+  **Clustering Rules**:
+  1. Group articles ONLY if they report the EXACT SAME specific event/announcement
+     - Example: "OpenAI announces GPT-5" from TechCrunch + The Verge + Reuters → ONE cluster
+     - Counter-example: "AI ethics discussion" + "AI safety concerns" → TWO singletons (no specific event)
+
+  2. Different events = different clusters, even if same company/topic
+     - Example: "Microsoft invests in OpenAI" ≠ "Microsoft releases Copilot feature" → TWO clusters
+
+  3. Maximum {max_clusters} clusters
+  4. Minimum {min_cluster_size} article(s) per cluster (singletons are OK for non-news)
+
+  5. Each cluster needs:
+     - A specific, factual title (10-150 chars) - state the EVENT, not the topic
+     - A comprehensive summary (50-500 chars) covering the SPECIFIC EVENT
+     - The main topic category (e.g., "model release", "research breakthrough", "policy")
+     - Keywords (max 10)
+     - List of article slugs included
+
+  **Output Format**: JSON with clusters array
+
+  **Critical Requirements**:
+  - Be STRICT: only group articles about the EXACT SAME EVENT
+  - Prefer singletons over loose grouping of unrelated articles
+  - Generic editorials without specific news → singleton with main_topic="editorial"
+  - Include ALL {num_articles} articles in the output (no article left behind)
+  - Prioritize factual news over opinion pieces

@@ -1,0 +1,154 @@
+# Step 4: Multi-day News Deduplication Prompt
+# Model: gemini-2.5-flash-lite
+
+system_prompt: |
+  You are a news deduplication system specializing in AI news.
+  Your task is to identify TRUE DUPLICATES (same story reported again) vs LEGITIMATE UPDATES (new developments).
+
+user_prompt: |
+  Compare {num_today_news} news items from today against {num_cached_news} items from the past {lookback_days} days.
+  Identify pairs that are TRUE DUPLICATES of the same event/story.
+
+  ---
+
+  **Today's News** ({num_today_news} items):
+  {today_news_formatted}
+
+  **Recent News from Cache** ({num_cached_news} items, past {lookback_days} days):
+  {cached_news_formatted}
+
+  ---
+
+  ## DUPLICATE vs UPDATE Decision Framework
+
+  ### TRUE DUPLICATE (include in output)
+  Two news items are duplicates if ALL conditions are met:
+  1. ✓ Same primary entity (company/organization/person)
+  2. ✓ Same specific event/announcement
+  3. ✓ NO new factual information in today's version
+  4. ✓ NO new quotes, data, or company responses
+  5. ✓ NOT a follow-up or temporal progression
+
+  **Common duplicate causes**:
+  - RSS feed delays (article published days ago, appears today)
+  - Syndicated content in multiple feeds with different dates
+  - Same announcement covered by multiple sources across days
+
+  **Examples**:
+  - Cached: "OpenAI announces GPT-5 with 200B parameters on Dec 20"
+  - Today: "OpenAI launches GPT-5, new 200B parameter model"
+  - **Decision**: DUPLICATE (same announcement, just restated)
+
+  ### LEGITIMATE UPDATE (do NOT include)
+  Two news items are separate if ANY condition is met:
+  - Contains new factual information (numbers, dates, specs)
+  - Contains new quotes from different people/sources
+  - Reports new company actions or responses
+  - Temporal progression (announcement → details → response)
+  - Different events by same entity
+
+  **Examples**:
+  - Cached: "OpenAI announces GPT-5"
+  - Today: "GPT-5 performance benchmarks revealed"
+  - **Decision**: SEPARATE (new information added)
+
+  - Cached: "EU proposes AI regulation"
+  - Today: "EU AI regulation passes committee vote"
+  - **Decision**: SEPARATE (different stage of same process)
+
+  ### RELATED BUT DISTINCT (do NOT include)
+  - Different companies, even if same industry
+  - Different products by same company
+  - Same topic but different specific events
+
+  **Examples**:
+  - Cached: "OpenAI releases GPT-5"
+  - Today: "Anthropic releases Claude 4"
+  - **Decision**: SEPARATE (different companies, different products)
+
+  ---
+
+  ## Analysis Process
+
+  For each today's news item:
+
+  1. **Identify candidates**: Scan cached news for same entity + similar event
+
+  2. **Check entity match**: Is it the EXACT SAME company/org/person?
+     - If NO → not duplicate, move on
+
+  3. **Check event match**: Is it the EXACT SAME event/announcement?
+     - If NO → not duplicate, move on
+
+  4. **Information novelty test** (CRITICAL):
+     - Does today's news contain ANY new facts not in cached version?
+     - New quotes? New data? New responses? New developments?
+     - If YES → not duplicate (it's an update)
+     - If NO → likely duplicate
+
+  5. **Temporal check**:
+     - Published <24h apart + no new info → Likely duplicate
+     - Published >24h apart + has new info → Likely update
+
+  6. **Multi-article clusters**:
+     - Check ALL articles in both clusters
+     - If ANY article in today's cluster adds new information → NOT duplicate
+
+  ---
+
+  ## Edge Cases
+
+  1. **Initial report vs detailed analysis**:
+     - Check if "detailed analysis" contains facts NOT in initial report
+     - If yes → separate; if no → duplicate
+
+  2. **Controversy + Response**:
+     - "AI model shows bias" ≠ "Company responds to bias allegations"
+     - Response is new development → separate
+
+  3. **Opinion from high-priority source**:
+     - Hard news ≠ Editorial/Op-Ed (even on same event)
+     - New perspective adds value → separate
+
+  4. **Incremental updates**:
+     - "500 affected" → "2,000 affected" → "final: 3,500 affected"
+     - Each update has new info → separate
+
+  ---
+
+  ## Critical Rules
+
+  1. **Updates are NOT duplicates**: Follow-ups with new info are legitimate news
+  2. **New information = separate**: Even 10% new facts means keep separate
+  3. **One-to-one mapping**: Each today's news matches at most ONE cached news
+  4. **When in doubt, DON'T merge**: Prefer keeping separate over merging
+  5. **Be STRICT and CONSERVATIVE**: Only merge when you're certain it's the same story
+
+  ---
+
+  ## Output Format
+
+  Return JSON with `duplicate_pairs` array containing ONLY true duplicates:
+
+  ```json
+  {
+    "duplicate_pairs": [
+      {
+        "news_today_id": "news-abc123",
+        "news_cached_id": "news-xyz789",
+        "merge_reason": "Same GPT-5 announcement, no new info (syndicated content)"
+      }
+    ],
+    "rationale": "Brief explanation of deduplication strategy"
+  }
+  ```
+
+  **Requirements**:
+  - Include ONLY pairs that are actual duplicates (same event, no new info)
+  - Empty array is valid if no duplicates found
+  - Each today news can match at most ONE cached news
+  - `merge_reason` must be specific (max 150 chars): state the event + why duplicate
+  - Good merge_reason: "Same GPT-5 launch announcement, syndicated across feeds"
+  - Bad merge_reason: "Similar topics" (too generic)
+
+  **Be conservative**: When uncertain, leave it out. Preserving legitimate updates is more important than aggressive deduplication.

@@ -1,0 +1,114 @@
+# Pipeline Configuration
+
+# Global Settings
+pipeline:
+  name: "awesome-ai-news"
+  version: "1.0.0"
+  execution_mode: "production"  # production, development, dry_run
+
+# Step 0: Cache Management
+step0_cache:
+  enabled: true
+  retention:
+    articles_days: 10
+    news_days: 3
+  backup_on_error: true
+  cleanup_on_start: true
+
+# Step 1: RSS Ingestion
+step1_ingestion:
+  enabled: true
+  timeout_seconds: 30
+  max_articles_per_feed: 50
+  user_agent: "awesome-ai-news/1.0"
+  parallel_fetch: true
+  max_concurrent_feeds: 5
+
+# Step 2: Single-Feed Deduplication
+step2_dedup:
+  enabled: true
+  similarity_threshold: 0.85
+  fields_to_compare:
+    - title
+    - url
+    - content
+  url_normalization: true
+
+# Step 3: AI Clustering
+step3_clustering:
+  enabled: true
+  llm_model: "gemini-2.5-flash-lite"
+  max_clusters: 20
+  min_cluster_size: 1
+  timeout_seconds: 30
+  retry_attempts: 3
+  retry_delay_seconds: 2
+  fallback_to_singleton: true
+  temperature: 0.3
+
+# Step 4: Multi-day News Deduplication
+step4_multi_dedup:
+  enabled: true
+  llm_model: "gemini-2.5-flash-lite"
+  lookback_days: 3
+  # similarity_threshold: 0.85  # DEPRECATED: LLM now decides directly without scoring
+  timeout_seconds: 30
+  retry_attempts: 3
+  temperature: 0.3
+  fallback_to_no_merge: true
+
+# Step 5: Selection
+step5_selection:
+  enabled: true
+  target_count: 10
+  min_quality_score: 0.6
+  scoring_weights:
+    recency: 0.3
+    source_priority: 0.3
+    content_quality: 0.2
+    engagement_potential: 0.2
+
+# Step 6: Enhancement
+step6_enhancement:
+  enabled: true
+  llm_model: "gemini-2.5-flash-lite"  # One call per news with grounding
+  use_grounding: true
+  timeout_seconds: 60
+  retry_attempts: 3
+  temperature: 0.2
+  max_summary_length: 3000
+
+# Step 7: Repository Update
+step7_repo:
+  enabled: true
+  output_file: "README.md"
+  archive_enabled: true
+  archive_dir: "archive"
+  commit_message_template: "Update AI news - {date}"
+  git_push: true
+
+# Step 8: RSS Generation
+step8_rss:
+  enabled: true
+  output_file: "feed.xml"
+  feed_title: "Awesome AI News"
+  feed_description: "Curated AI news aggregated and enhanced by AI"
+  feed_link: "https://github.com/yourusername/awesome-ai-news"
+  max_items: 50
+
+# Logging (using loguru)
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  serialize: true  # Serialize logs to JSON
+  colorize: true  # Colorize console output
+  file_path: "logs/pipeline.log"
+  rotation: "500 MB"  # Rotation size/time
+  retention: "30 days"  # Retention period
+  compression: "zip"  # Compression format
+
+# Error Handling
+error_handling:
+  stop_on_critical: true
+  continue_on_recoverable: true
+  max_consecutive_failures: 3
+  notification_on_failure: false
