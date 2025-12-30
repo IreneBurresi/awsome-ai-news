@@ -20,7 +20,7 @@ class CategorizedNewsItem(BaseModel):
     news_id: str = Field(description="Unique news ID")
     category: str = Field(description="News category")
     importance_score: float = Field(ge=0.0, le=10.0, description="Importance score (0-10)")
-    reasoning: str = Field(max_length=300, description="Brief reasoning for category and score")
+    reasoning: str = Field(description="Brief reasoning for category and score (max 300 chars)")
 
 
 class GeminiCategorizationResponse(BaseModel):
