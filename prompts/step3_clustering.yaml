@@ -1,53 +1,180 @@
 # Step 3: News Clustering Prompt
-# Model: gemini-2.5-flash-lite
+# Model: gemini-2.5-flash-thinking / gemini-2.5-pro-thinking
+# Purpose: Cluster AI news articles by concrete events
 
 system_prompt: |
-  You are an AI news clustering system.
-  Your task is to identify CONCRETE NEWS EVENTS and group articles reporting the SAME specific event.
+  You are an expert AI news analyst specializing in identifying and clustering concrete news events.
+  You operate in two phases:
+  1. REASONING: Analyze articles systematically to identify events and relationships
+  2. OUTPUT: Produce structured JSON with clusters
+
+  Your core competency is distinguishing CONCRETE NEWS EVENTS from generic content, while preserving high-quality opinion/analysis from authoritative sources.
 
 user_prompt: |
-  **Input Articles** ({num_articles} articles):
+  ## TASK
+  Analyze {num_articles} articles and cluster them by SPECIFIC NEWS EVENTS.
+  Filter out non-AI content while preserving authoritative analysis and opinion pieces.
+
+  ---
+
+  ## INPUT DATA
   {articles_formatted}
 
-  **CRITICAL: What is a "NEWS EVENT"?**
-  ✅ CONCRETE NEWS (cluster these):
-  - Product/model releases (e.g., "GPT-5 released", "New Claude version")
-  - Company announcements (funding rounds, acquisitions, partnerships, lawsuits)
-  - Research breakthroughs (specific papers, discoveries, benchmarks)
-  - Policy/regulation (new laws, bans, regulatory decisions)
-  - Leadership changes, hirings, departures
-  - Specific incidents, outages, security breaches
+  ---
 
-  ❌ NOT NEWS (DO NOT cluster, mark as singletons):
-  - Generic opinion pieces or editorials without specific events
-  - Philosophical discussions about AI ethics/future (without concrete policy/event)
-  - General trend analysis ("AI is transforming X") without specific announcements
-  - Future predictions or forecasts without hard news
-  - How-to guides, tutorials, explainers
+  ## PHASE 1: REASONING (Think Step-by-Step)
 
-  **Clustering Rules**:
-  1. Group articles ONLY if they report the EXACT SAME specific event/announcement
-     - Example: "OpenAI announces GPT-5" from TechCrunch + The Verge + Reuters → ONE cluster
-     - Counter-example: "AI ethics discussion" + "AI safety concerns" → TWO singletons (no specific event)
+  Before producing output, reason through:
 
-  2. Different events = different clusters, even if same company/topic
-     - Example: "Microsoft invests in OpenAI" ≠ "Microsoft releases Copilot feature" → TWO clusters
+  ### Step 1: AI Relevance Filter
+  For each article, determine:
+  - Is this about artificial intelligence / machine learning / LLMs / AI applications?
+  - Or is it: geopolitics, general tech, promotional content, unrelated news?
+  
+  Mark articles to EXCLUDE from clustering.
 
-  3. Maximum {max_clusters} clusters
-  4. Minimum {min_cluster_size} article(s) per cluster (singletons are OK for non-news)
+  ### Step 2: Event Identification & Source Authority Assessment
+  For each AI-relevant article, identify:
+  
+  #### A. Event Type Classification
+  
+  **TIER 1 - CONCRETE EVENTS** (always cluster-eligible):
+  • Product/Model Releases: "GPT-5 launched", "Claude 4 announced", "Gemini 2.5 released"
+  • Company Milestones: funding rounds, acquisitions, partnerships, IPOs, layoffs
+  • Research Breakthroughs: specific papers published, benchmarks achieved, discoveries announced
+  • Policy/Regulation: laws passed, bans enacted, regulatory decisions, court rulings, government reports
+  • Personnel Changes: C-suite appointments, departures, team formations
+  • Incidents: outages, security breaches, controversies tied to specific events
+  • Industry Data: earnings reports, market analysis with concrete numbers, surveys/studies released
+  
+  **TIER 2 - AUTHORITATIVE ANALYSIS** (keep if from high-priority sources):
+  • Opinion/Editorial pieces from major outlets (NYT, FT, IEEE, Wired, etc.)
+  • Trend Analysis with substantial reporting (not just speculation)
+  • Expert Commentary on ongoing developments
+  • In-depth Features on AI topics
+  
+  **Source Authority Matrix**:
+  - **High Priority** (feed_priority >= 8): Keep all content including opinion/analysis
+    - Examples: IEEE Spectrum, NY Times, Financial Times, Nature, Science
+  - **Medium Priority** (feed_priority 6-7): Keep if reporting concrete events or substantial analysis
+    - Examples: TechCrunch, The Verge, Wired
+  - **Low Priority** (feed_priority < 6): Keep only concrete event reporting
+  
+  **EXCLUDE** (regardless of source):
+  • Pure How-To/Tutorials without news hook
+  • Evergreen content (timeless guides)
+  • Promotional content / advertorials
+  • Unsubstantiated future predictions without expert analysis
+  • Generic AI safety philosophy without concrete anchoring
+  
+  #### B. Event Specificity Assessment
+  
+  **Purpose**: Identify if there's a CONCRETE EVENT to potentially deep-dive later.
+  
+  ✅ **SUFFICIENT SPECIFICITY** (cluster-eligible):
+  - References a specific announcement, paper, policy, or incident
+  - Can answer: "What happened?" even if details are incomplete
+  - Examples:
+    - "OpenAI announces GPT-5" ✅ (details will come later)
+    - "New EU AI regulation passed" ✅ (can research specifics)
+    - "Major AI lab reports breakthrough" ✅ (identifiable event)
+    - "FT analysis: AI reshaping finance sector" ✅ (from authoritative source)
+  
+  ❌ **INSUFFICIENT SPECIFICITY** (likely exclude or singleton):
+  - Pure abstraction without event anchor: "The future of AI consciousness"
+  - Generic evergreen content: "How AI works: A beginner's guide"
+  - Vague speculation: "AI might change everything" (no expert, no substance)
+  
+  **Key Insight**: We don't need WHO/WHAT/WHEN fully specified NOW - that's for the deep-dive phase.
+  We just need to identify: "Is there a CONCRETE EVENT or SUBSTANTIAL ANALYSIS worth tracking?"
 
-  5. Each cluster needs:
-     - A specific, factual title (10-150 chars) - state the EVENT, not the topic
-     - A comprehensive summary (50-500 chars) covering the SPECIFIC EVENT
-     - The main topic category (e.g., "model release", "research breakthrough", "policy")
-     - Keywords (max 10)
-     - List of article slugs included
+  ### Step 3: Clustering Logic
+  Group articles ONLY if they report/analyze the IDENTICAL EVENT or TOPIC (for authoritative analysis):
+  
+  **Clustering Criteria**:
+  1. **Same Core Event**: Must reference the same announcement/incident/release
+     - "OpenAI launches GPT-5" (TechCrunch) + "OpenAI unveils GPT-5" (The Verge) → SAME CLUSTER
+     - "OpenAI launches GPT-5" + "Anthropic releases Claude 4" → DIFFERENT CLUSTERS
+  
+  2. **Same Analysis Topic**: For high-priority opinion/editorial, group if addressing same specific development
+     - NYT Editorial: "GPT-5 raises new copyright concerns"
+     - FT Analysis: "Legal implications of GPT-5 release" → SAME CLUSTER (if both about GPT-5)
+  
+  3. **Temporal Proximity**: Events within ~72 hours can be same cluster IF clearly related
+     - Day 1: "Company X announces product Y"
+     - Day 2: "Company X shares details on product Y" → SAME CLUSTER
+  
+  4. **No Pure Topic-Based Grouping**: Different events on same broad topic = different clusters
+     - "Microsoft invests $10B in OpenAI" ≠ "Microsoft releases Copilot update" → SEPARATE
+     - Exception: Multiple expert analyses of same specific event can cluster together
+  
+  5. **Singleton Handling**: 
+     - Concrete events with only 1 article → singleton cluster (valid)
+     - Authoritative analysis piece standalone → singleton with appropriate main_topic
+  
+  **Constraints**:
+  - Maximum {max_clusters} clusters
+  - Minimum {min_cluster_size} article(s) per cluster (singletons allowed)
 
-  **Output Format**: JSON with clusters array
+  ### Step 4: Quality Check
+  For each proposed cluster, verify:
+  - [ ] All articles report the SAME event OR analyze the SAME specific development
+  - [ ] Cluster title identifies the EVENT/TOPIC clearly (can be refined in deep-dive)
+  - [ ] Summary captures the essence (full details not required yet)
+  - [ ] High-priority sources' analysis pieces are preserved, not filtered as "generic"
+  - [ ] Keywords are specific enough to enable retrieval
 
-  **Critical Requirements**:
-  - Be STRICT: only group articles about the EXACT SAME EVENT
-  - Prefer singletons over loose grouping of unrelated articles
-  - Generic editorials without specific news → singleton with main_topic="editorial"
-  - Include ALL {num_articles} articles in the output (no article left behind)
-  - Prioritize factual news over opinion pieces
+  ---
+
+  ## PHASE 2: OUTPUT
+
+  Produce a JSON object following the EXACT schema.
+
+  ---
+
+  ## QUALITY CRITERIA
+
+  Excellent clustering achieves:
+  1. **Precision**: Articles in same cluster cover IDENTICAL events/topics (no false groupings)
+  2. **Completeness**: ALL input articles accounted for (clustered or excluded with reason)
+  3. **Source Awareness**: High-priority opinion/analysis preserved, not dismissed as "generic"
+  4. **Clarity**: Titles/summaries enable understanding of what to deep-dive
+  5. **AI Relevance**: Non-AI content filtered out
+  6. **Pragmatism**: Details don't need to be complete - that's for the next phase
+
+  ---
+
+  ## EDGE CASES
+
+  - **Duplicate articles** (same event, same source): Include only once, note in metadata
+  - **Multi-language articles** on same event: Cluster together, use English for title/summary
+  - **Follow-up coverage**: Group with original announcement if within 72h and clearly same event
+  - **Opinion on recent event**: Cluster with event articles if clearly responding to same development
+  - **Authoritative trend analysis**: Keep as singleton if no matching articles, mark main_topic="analysis"
+  - **Unclear event date**: Use article publication date, mark uncertainty in summary
+  - **Mixed cluster** (news + opinion): Allowed if all discuss same specific event/development
+
+  ---
+
+  ## CRITICAL REMINDERS
+
+  1. **Don't over-filter opinion pieces** - NYT, FT, IEEE editorials are valuable signal
+  2. **Specificity ≠ Complete Details** - "New AI regulation announced" is sufficient, we'll research later
+  3. **Source priority matters** - A generic-sounding piece from Nature is likely substantial
+  4. **Cluster by event identity**, not broad themes - "AI in healthcare" is too broad unless about specific announcement
+
+  ---
+
+  ## OUTPUT INSTRUCTIONS
+
+  1. First, show your reasoning (optional, for debugging):
+     - List of excluded non-AI articles with reasons
+     - Event identification for each AI article
+     - Source authority assessment
+     - Clustering decisions with justifications
+
+  2. Then, output the final JSON (mandatory)
+
+  Be JUDICIOUS on filtering - preserve authoritative voices even if opinion/analysis.
+  Be STRICT on clustering - prefer singletons over incorrect groupings.
+  A high-quality output balances comprehensiveness with precision.
