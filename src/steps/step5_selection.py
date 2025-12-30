@@ -241,9 +241,7 @@ async def _call_gemini_categorization(
             },
         )
     except Exception as e:
-        logger.error(f"Gemini API call failed with full traceback:")
-        import traceback
-        traceback.print_exc()
+        logger.exception(f"Gemini API call failed with ValueError. News count: {len(news_clusters)}")
         raise
 
     logger.debug("Gemini API response received", response_text=response.text[:200])  # type: ignore
