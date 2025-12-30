@@ -126,24 +126,8 @@ user_prompt: |
 
   ---
 
-  ## Output Format
+  ## Requirements
 
-  Return JSON with `duplicate_pairs` array containing ONLY true duplicates:
-
-  ```json
-  {
-    "duplicate_pairs": [
-      {
-        "news_today_id": "news-abc123",
-        "news_cached_id": "news-xyz789",
-        "merge_reason": "Same GPT-5 announcement, no new info (syndicated content)"
-      }
-    ],
-    "rationale": "Brief explanation of deduplication strategy"
-  }
-  ```
-
-  **Requirements**:
   - Include ONLY pairs that are actual duplicates (same event, no new info)
   - Empty array is valid if no duplicates found
   - Each today news can match at most ONE cached news

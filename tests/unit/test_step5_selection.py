@@ -8,6 +8,7 @@ import pytest
 from src.models.config import Step5Config
 from src.models.news import CategorizedNews, NewsCategory, NewsCluster
 from src.steps.step5_selection import (
+    CategorizedNewsItem,
     _calculate_category_distribution,
     _get_category_description,
     _parse_categorized_news,
@@ -109,24 +110,24 @@ def test_parse_categorized_news(sample_news_clusters: list[NewsCluster]) -> None
     """Test parsing categorization response."""
     mock_response = MagicMock()
     mock_response.categorized_news = [
-        {
-            "news_id": "news-001",
-            "category": "model_release",
-            "importance_score": 9.5,
-            "reasoning": "Major model release from leading company",
-        },
-        {
-            "news_id": "news-002",
-            "category": "research",
-            "importance_score": 7.0,
-            "reasoning": "Important safety research",
-        },
-        {
-            "news_id": "news-003",
-            "category": "policy_regulation",
-            "importance_score": 8.5,
-            "reasoning": "Significant policy development",
-        },
+        CategorizedNewsItem(
+            news_id="news-001",
+            category="model_release",
+            importance_score=9.5,
+            reasoning="Major model release from leading company",
+        ),
+        CategorizedNewsItem(
+            news_id="news-002",
+            category="research",
+            importance_score=7.0,
+            reasoning="Important safety research",
+        ),
+        CategorizedNewsItem(
+            news_id="news-003",
+            category="policy_regulation",
+            importance_score=8.5,
+            reasoning="Significant policy development",
+        ),
     ]
     mock_response.rationale = "Categorization complete"
 
@@ -145,24 +146,24 @@ def test_parse_categorized_news_deduplicates(
     """Ensure duplicate news entries from the LLM are ignored."""
     mock_response = MagicMock()
     mock_response.categorized_news = [
-        {
-            "news_id": "news-001",
-            "category": "model_release",
-            "importance_score": 9.5,
-            "reasoning": "Primary classification",
-        },
-        {
-            "news_id": "news-001",
-            "category": "research",
-            "importance_score": 4.0,
-            "reasoning": "Duplicate that should be ignored",
-        },
-        {
-            "news_id": "news-002",
-            "category": "research",
-            "importance_score": 7.5,
-            "reasoning": "Different news item",
-        },
+        CategorizedNewsItem(
+            news_id="news-001",
+            category="model_release",
+            importance_score=9.5,
+            reasoning="Primary classification",
+        ),
+        CategorizedNewsItem(
+            news_id="news-001",
+            category="research",
+            importance_score=4.0,
+            reasoning="Duplicate that should be ignored",
+        ),
+        CategorizedNewsItem(
+            news_id="news-002",
+            category="research",
+            importance_score=7.5,
+            reasoning="Different news item",
+        ),
     ]
     mock_response.rationale = "Duplicate test"
 
@@ -182,12 +183,12 @@ def test_parse_categorized_news_invalid_category(
     """Test parsing with invalid category defaults to OTHER."""
     mock_response = MagicMock()
     mock_response.categorized_news = [
-        {
-            "news_id": "news-001",
-            "category": "invalid_category",
-            "importance_score": 5.0,
-            "reasoning": "Test",
-        }
+        CategorizedNewsItem(
+            news_id="news-001",
+            category="invalid_category",
+            importance_score=5.0,
+            reasoning="Test",
+        )
     ]
     mock_response.rationale = "Test"
 
@@ -203,12 +204,12 @@ def test_parse_categorized_news_missing_news(
     """Test parsing when some news are not categorized."""
     mock_response = MagicMock()
     mock_response.categorized_news = [
-        {
-            "news_id": "news-001",
-            "category": "model_release",
-            "importance_score": 9.0,
-            "reasoning": "Test",
-        }
+        CategorizedNewsItem(
+            news_id="news-001",
+            category="model_release",
+            importance_score=9.0,
+            reasoning="Test",
+        )
         # news-002 and news-003 missing
     ]
     mock_response.rationale = "Test"
@@ -231,12 +232,12 @@ def test_parse_categorized_news_invalid_news_id(
     """Test parsing with invalid news ID (should skip)."""
     mock_response = MagicMock()
     mock_response.categorized_news = [
-        {
-            "news_id": "news-999",  # Doesn't exist
-            "category": "model_release",
-            "importance_score": 9.0,
-            "reasoning": "Test",
-        }
+        CategorizedNewsItem(
+            news_id="news-999",  # Doesn't exist
+            category="model_release",
+            importance_score=9.0,
+            reasoning="Test",
+        )
     ]
     mock_response.rationale = "Test"
 
@@ -250,35 +251,39 @@ def test_parse_categorized_news_invalid_news_id(
 def test_parse_categorized_news_score_clamping(
     sample_news_clusters: list[NewsCluster],
 ) -> None:
-    """Test that importance scores are clamped to valid range."""
+    """Test that importance scores at boundary values work correctly.
+
+    Note: With Pydantic schema validation (ge=0.0, le=10.0), out-of-range values
+    are rejected at model creation time. This test verifies boundary values work.
+    """
     mock_response = MagicMock()
     mock_response.categorized_news = [
-        {
-            "news_id": "news-001",
-            "category": "model_release",
-            "importance_score": 15.0,  # Too high
-            "reasoning": "Test",
-        },
-        {
-            "news_id": "news-002",
-            "category": "research",
-            "importance_score": -2.0,  # Too low
-            "reasoning": "Test",
-        },
-        {
-            "news_id": "news-003",
-            "category": "policy_regulation",
-            "importance_score": 5.0,  # Valid
-            "reasoning": "Test",
-        },
+        CategorizedNewsItem(
+            news_id="news-001",
+            category="model_release",
+            importance_score=10.0,  # Max valid
+            reasoning="Test",
+        ),
+        CategorizedNewsItem(
+            news_id="news-002",
+            category="research",
+            importance_score=0.0,  # Min valid
+            reasoning="Test",
+        ),
+        CategorizedNewsItem(
+            news_id="news-003",
+            category="policy_regulation",
+            importance_score=5.0,  # Mid-range
+            reasoning="Test",
+        ),
     ]
     mock_response.rationale = "Test"
 
     categorized = _parse_categorized_news(sample_news_clusters, mock_response)
 
-    assert categorized[0].importance_score == 10.0  # Clamped to max
-    assert categorized[1].importance_score == 0.0  # Clamped to min
-    assert categorized[2].importance_score == 5.0  # Unchanged
+    assert categorized[0].importance_score == 10.0  # Max preserved
+    assert categorized[1].importance_score == 0.0  # Min preserved
+    assert categorized[2].importance_score == 5.0  # Mid preserved
 
 
 def test_calculate_category_distribution() -> None:

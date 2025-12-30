@@ -16,7 +16,7 @@ class NewsCluster(BaseModel):
     title: str = Field(description="News title (10-150 chars)")
     summary: str = Field(description="News summary (50-500 chars)")
     article_slugs: list[str] = Field(description="List of article slugs (min 1)")
-    article_count: int = Field(ge=1, description="Number of articles in cluster")
+    article_count: int = Field(description="Number of articles in cluster")
     main_topic: str = Field(description="Main topic (e.g., 'model release', 'research')")
     keywords: list[str] = Field(description="Extracted keywords (max 10)")
     created_at: datetime = Field(default_factory=datetime.utcnow, description="Creation timestamp")

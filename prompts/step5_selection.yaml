@@ -71,24 +71,6 @@ user_prompt: |
 
   ---
 
-  ## Output Format
-
-  Return JSON with categorized_news array:
-
-  ```json
-  {
-    "categorized_news": [
-      {
-        "news_id": "news-abc123",
-        "category": "model_release",
-        "importance_score": 8.5,
-        "reasoning": "Major model release from leading company (max 300 chars)"
-      }
-    ],
-    "rationale": "Brief explanation of categorization strategy"
-  }
-  ```
-
   **Requirements**:
   - Each news gets exactly one category
   - Scores must be realistic (use full 0-10 range)

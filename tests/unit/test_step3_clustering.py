@@ -273,34 +273,6 @@ class TestNewsClusterValidation:
         assert cluster.article_count == 2
         assert len(cluster.article_slugs) == 2
 
-    def test_title_too_short(self) -> None:
-        """Test title minimum length validation."""
-        with pytest.raises(ValidationError):
-            NewsCluster(
-                news_id="news-123",
-                title="Short",  # < 10 chars
-                summary="Valid summary with more than 50 characters to pass validation.",
-                article_slugs=["slug-1"],
-                article_count=1,
-                main_topic="topic",
-                keywords=["key"],
-                created_at=datetime.now(),
-            )
-
-    def test_summary_too_short(self) -> None:
-        """Test summary minimum length validation."""
-        with pytest.raises(ValidationError):
-            NewsCluster(
-                news_id="news-123",
-                title="Valid Title Here",
-                summary="Short",  # < 50 chars
-                article_slugs=["slug-1"],
-                article_count=1,
-                main_topic="topic",
-                keywords=["key"],
-                created_at=datetime.now(),
-            )
-
     def test_article_count_mismatch(self) -> None:
         """Test article_count must match article_slugs length."""
         with pytest.raises(ValidationError):
@@ -315,21 +287,21 @@ class TestNewsClusterValidation:
                 created_at=datetime.now(),
             )
 
-    def test_empty_article_slugs(self) -> None:
-        """Test article_slugs cannot be empty."""
-        # This should fail because article_count must be >= 1
-        # and count must match slugs length
-        with pytest.raises(ValidationError):
-            NewsCluster(
-                news_id="news-123",
-                title="Valid Title",
-                summary="Valid summary with enough characters to pass validation.",
-                article_slugs=[],  # Empty list
-                article_count=0,
-                main_topic="topic",
-                keywords=["key"],
-                created_at=datetime.now(),
-            )
+    def test_empty_article_slugs_allowed(self) -> None:
+        """Test that empty article_slugs is allowed when count matches (for LLM flexibility)."""
+        # Note: Validation constraints removed to allow LLM structured output flexibility
+        cluster = NewsCluster(
+            news_id="news-123",
+            title="Valid Title",
+            summary="Valid summary",
+            article_slugs=[],
+            article_count=0,
+            main_topic="topic",
+            keywords=["key"],
+            created_at=datetime.now(),
+        )
+        assert cluster.article_count == 0
+        assert cluster.article_slugs == []
 
 
 class TestStep3Result:

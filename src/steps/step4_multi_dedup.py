@@ -341,14 +341,14 @@ async def _call_gemini_deduplication(
 
     logger.debug("Calling Gemini API for deduplication", model=config.llm_model)
 
-    # Make API call with structured output
+    # Make API call with structured output (using Pydantic class directly)
     response = client.models.generate_content(
         model=config.llm_model,
         contents=prompt,
         config={
             "temperature": config.temperature,
             "response_mime_type": "application/json",
-            "response_json_schema": GeminiDeduplicationResponse.model_json_schema(),
+            "response_schema": GeminiDeduplicationResponse,
         },
     )
 

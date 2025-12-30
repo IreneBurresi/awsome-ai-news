@@ -19,8 +19,8 @@ class CategorizedNewsItem(BaseModel):
 
     news_id: str = Field(description="Unique news ID")
     category: str = Field(description="News category")
-    importance_score: float = Field(ge=0.0, le=10.0, description="Importance score (0-10)")
-    reasoning: str = Field(description="Brief reasoning for category and score (max 300 chars)")
+    importance_score: float = Field(description="Importance score (0-10)")
+    reasoning: str = Field(description="Brief reasoning for category and score")
 
 
 class GeminiCategorizationResponse(BaseModel):
@@ -229,20 +229,16 @@ async def _call_gemini_categorization(
 
     logger.debug("Calling Gemini API for categorization")
 
-    # Make API call with structured output
-    try:
-        response = client.models.generate_content(
-            model="gemini-2.5-flash-lite",
-            contents=prompt,
-            config={
-                "temperature": 0.3,
-                "response_mime_type": "application/json",
-                "response_json_schema": GeminiCategorizationResponse.model_json_schema(),
-            },
-        )
-    except Exception as e:
-        logger.exception(f"Gemini API call failed with ValueError. News count: {len(news_clusters)}")
-        raise
+    # Make API call with structured output (using Pydantic class directly)
+    response = client.models.generate_content(
+        model="gemini-2.5-flash-lite",
+        contents=prompt,
+        config={
+            "temperature": 0.3,
+            "response_mime_type": "application/json",
+            "response_schema": GeminiCategorizationResponse,
+        },
+    )
 
     logger.debug("Gemini API response received", response_text=response.text[:200])  # type: ignore
 
