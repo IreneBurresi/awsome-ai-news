@@ -14,10 +14,19 @@ from src.models.config import Step5Config
 from src.models.news import CategorizedNews, NewsCategory, NewsCluster, Step5Result
 
 
+class CategorizedNewsItem(BaseModel):
+    """Single categorized news item from Gemini."""
+
+    news_id: str = Field(description="Unique news ID")
+    category: str = Field(description="News category")
+    importance_score: float = Field(ge=0.0, le=10.0, description="Importance score (0-10)")
+    reasoning: str = Field(max_length=300, description="Brief reasoning for category and score")
+
+
 class GeminiCategorizationResponse(BaseModel):
     """Structured response from Gemini for news categorization and scoring."""
 
-    categorized_news: list[dict] = Field(
+    categorized_news: list[CategorizedNewsItem] = Field(
         description="List of news with category and importance score"
     )
     rationale: str = Field(description="Overall categorization strategy explanation")
@@ -304,10 +313,10 @@ def _parse_categorized_news(
     seen_news_ids: set[str] = set()
 
     for item in categorization_response.categorized_news:
-        news_id = item.get("news_id")
-        category_str = item.get("category")
-        importance_score = item.get("importance_score", 5.0)
-        reasoning = item.get("reasoning")
+        news_id = item.news_id
+        category_str = item.category
+        importance_score = item.importance_score
+        reasoning = item.reasoning
 
         if not news_id:
             logger.warning("Skipping categorized item without news_id: %s", item)
