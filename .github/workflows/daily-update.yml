@@ -19,6 +19,7 @@ jobs:
   update-news:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    environment: production
     # Only run on the original repository, prevent execution on forks
     if: github.repository == 'IreneBurresi/awsome-ai-news'
 
