@@ -230,15 +230,21 @@ async def _call_gemini_categorization(
     logger.debug("Calling Gemini API for categorization")
 
     # Make API call with structured output
-    response = client.models.generate_content(
-        model="gemini-2.5-flash-lite",
-        contents=prompt,
-        config={
-            "temperature": 0.3,
-            "response_mime_type": "application/json",
-            "response_json_schema": GeminiCategorizationResponse.model_json_schema(),
-        },
-    )
+    try:
+        response = client.models.generate_content(
+            model="gemini-2.5-flash-lite",
+            contents=prompt,
+            config={
+                "temperature": 0.3,
+                "response_mime_type": "application/json",
+                "response_json_schema": GeminiCategorizationResponse.model_json_schema(),
+            },
+        )
+    except Exception as e:
+        logger.error(f"Gemini API call failed with full traceback:")
+        import traceback
+        traceback.print_exc()
+        raise
 
     logger.debug("Gemini API response received", response_text=response.text[:200])  # type: ignore
 
