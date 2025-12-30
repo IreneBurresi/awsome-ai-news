@@ -19,8 +19,17 @@ jobs:
   update-news:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # Only run on the original repository, prevent execution on forks
+    if: github.repository == 'IreneBurresi/awsome-ai-news'
 
     steps:
+      - name: Verify authorized user
+        if: github.event_name == 'workflow_dispatch' && github.actor != 'IreneBurresi'
+        run: |
+          echo "::error::Unauthorized user: ${{ github.actor }}"
+          echo "Only the repository owner can manually trigger this workflow."
+          exit 1
+
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
