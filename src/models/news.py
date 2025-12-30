@@ -13,8 +13,8 @@ class NewsCluster(BaseModel):
     """
 
     news_id: str = Field(description="Unique news ID")
-    title: str = Field(min_length=10, description="News title (10-150 chars)")
-    summary: str = Field(min_length=50, description="News summary (50-500 chars)")
+    title: str = Field(description="News title (10-150 chars)")
+    summary: str = Field(description="News summary (50-500 chars)")
     article_slugs: list[str] = Field(description="List of article slugs (min 1)")
     article_count: int = Field(ge=1, description="Number of articles in cluster")
     main_topic: str = Field(description="Main topic (e.g., 'model release', 'research')")
@@ -124,7 +124,7 @@ class Step5Result(BaseModel):
 class Citation(BaseModel):
     """Citation quote from a source (nested in ExternalLink)."""
 
-    text: str = Field(min_length=10, max_length=500, description="Citation text")
+    text: str = Field(description="Citation text (10-500 chars)")
     author: str | None = Field(default=None, description="Citation author")
     source: str | None = Field(default=None, description="Citation source/outlet")
     url: HttpUrl | None = Field(default=None, description="Citation source URL")
@@ -134,14 +134,14 @@ class ExternalLink(BaseModel):
     """External link for news enhancement with nested citations."""
 
     url: HttpUrl = Field(description="External link URL")
-    title: str = Field(min_length=5, max_length=200, description="Link title")
+    title: str = Field(description="Link title (5-200 chars)")
     source: str = Field(description="Source domain (e.g., techcrunch.com)")
     citations: list[Citation] = Field(
         default_factory=list, description="Citations from this source"
     )
     relevance_score: float = Field(ge=0.0, le=1.0, default=1.0, description="Relevance score")
     snippet: str | None = Field(
-        default=None, max_length=300, description="Text snippet from source"
+        default=None, description="Text snippet from source (max 300 chars)"
     )
 
 
