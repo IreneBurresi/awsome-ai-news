@@ -10,139 +10,156 @@ Fresh AI news added daily at 08:00 UTC.
 
 <!-- NEWS_START -->
 
-## 📰 Latest AI News - 2025-12-31
+## 📰 Latest AI News - 2026-01-01
+
+### 📌 China's AI Ambitions and Developments
+**Category**: Other  **Score**: 8.8/10  **Articles**: 6
+China is making substantial advancements in artificial intelligence, marked by significant financial investments and the development of cutting-edge AI systems. Moonshot AI, a prominent AI startup, recently secured $500 million in a Series C funding round, valuing the company at $4.3 billion. This f...
+
+**Key Points:**
+- Chinese AI startups Moonshot AI and Zhipu AI have recently secured substantial funding rounds, totaling hundreds of millions of dollars, indicating significant private and state-backed investment in the sector.
+- China has launched an advanced AI system capable of autonomous scientific research, leveraging its national supercomputing network to accelerate discovery and compete on a global scale.
+- New draft regulations are being proposed in China to address the mental health and emotional impact of AI, particularly concerning chatbots, with measures aimed at protecting minors and preventing harmful interactions.
+- Shenzhen is positioning itself as a leading AI hub with comprehensive plans to integrate AI across various sectors and industries, aiming for widespread adoption and technological leadership.
+
+**Sources:**
+- [scmp.com](https://www.scmp.com/tech/tech-trends/article/3338334/chinas-moonshot-ai-raises-us500-million-latest-funding-round-report)
+- [technode.com](https://technode.com/2025/12/31/idg-leads-500m-series-c-for-moonshot-ai-oversubscribed-by-alibaba-tencent/)
+- [edgen.tech](https://www.edgen.tech/news/stock/moonshot-ai-raises-500m-at-43b-valuation-to-fuel-china-ai-race)
 
 ### 💰 Meta Acquires AI Startup Manus for Over $2 Billion, Bolstering Agent Capabilities
-**Category**: Funding Acquisition  **Score**: 9.0/10  **Articles**: 6
-Meta has acquired the AI startup Manus, founded in China, for over $2 billion. This strategic move aims to enhance Meta's AI agent capabilities and integrate Manus's technology into its platforms like Facebook, Instagram, and WhatsApp. The acquisition is seen as a significant step in the ongoing US-...
+**Category**: Funding Acquisition  **Score**: 8.5/10  **Articles**: 6
+Meta has acquired the AI startup Manus, which has roots in China but is now based in Singapore, for a reported sum exceeding $2 billion. This strategic acquisition is aimed at significantly bolstering Meta's capabilities in developing and deploying AI agents, which are designed to perform complex ta...
 
 **Key Points:**
-- Meta has acquired the AI startup Manus for over $2 billion, aiming to enhance its AI agent capabilities.
-- Manus specializes in "general-purpose" AI agents capable of autonomous task execution, differentiating it from traditional chatbots.
-- The acquisition is a strategic move for Meta amidst intense competition in the AI sector and aims to integrate Manus's technology across its major platforms.
+- Meta has acquired AI startup Manus for over $2 billion, aiming to enhance its AI agent capabilities.
+- Manus develops autonomous AI agents capable of performing complex tasks, with a strong focus on commercial viability through subscriptions.
+- The acquisition is part of Meta's strategy to integrate advanced AI into its consumer and business products, accelerating its AI commercialization efforts amidst global competition.
 
 **Sources:**
-- [channelnewsasia.com](https://www.channelnewsasia.com/business/meta-acquire-manus-chinese-ai-startup-singapore-based-5753956)
+- [fortune.com](https://fortune.com/2025/12/30/meta-buys-manus-mark-zuckerberg-ai-spending-spree-china-startup/)
 - [apnews.com](https://apnews.com/article/meta-manus-purchase-ai-agents-aaf01029923011a403ceeb949cf3db5e)
-- [straitstimes.com](https://www.straitstimes.com/business/companies-markets/meta-to-acquire-singapore-based-start-up-manus-to-boost-advanced-ai-features)
+- [techradar.com](https://www.techradar.com/pro/meta-buys-manus-for-usd2-billion-to-power-high-stakes-ai-agent-race)
 
 ### 💰 SoftBank Invests Heavily in AI Infrastructure with $4 Billion DigitalBridge Acquisition
-**Category**: Funding Acquisition  **Score**: 8.5/10  **Articles**: 4
-SoftBank is acquiring DigitalBridge for $4 billion to bolster its AI infrastructure. This move signifies SoftBank's aggressive investment strategy in the AI sector, aiming to deepen its ties and position itself within the rapidly growing AI market. The acquisition is part of a broader trend of signi...
+**Category**: Funding Acquisition  **Score**: 8.2/10  **Articles**: 4
+SoftBank Group has announced a definitive agreement to acquire DigitalBridge Group, Inc. for approximately $4 billion, a move aimed at significantly expanding SoftBank's investment in artificial intelligence (AI) infrastructure. This acquisition is central to SoftBank's broader strategy to achieve "...
 
 **Key Points:**
-- SoftBank Group is acquiring DigitalBridge for $4 billion to enhance its AI infrastructure capabilities.
-- The acquisition aims to strengthen SoftBank's ability to build, scale, and finance the foundational infrastructure necessary for next-generation AI services and applications.
-- This move is part of SoftBank's broader strategy to invest heavily in the AI sector, complementing its significant investments in OpenAI and participation in the "Stargate Project."
-- The deal addresses the growing demand for AI computing capacity and the increasing constraints on physical infrastructure like data centers and power.
+- SoftBank is acquiring DigitalBridge for approximately $4 billion to enhance its AI infrastructure capabilities.
+- The acquisition is part of SoftBank's broader strategy to lead in the development of Artificial Super Intelligence (ASI).
+- DigitalBridge's extensive portfolio of data centers, cell towers, and fiber networks will provide critical physical infrastructure for AI services.
+- The deal underscores a growing industry trend of significant investments in AI infrastructure by major technology players.
 
 **Sources:**
-- [digitalbridge.com](https://ir.digitalbridge.com/news-releases/news-release-details/softbank-group-acquire-digitalbridge-4-billion-scale-next-gen-ai)
-- [indiatimes.com](https://telecom.economictimes.indiatimes.com/news/internet/softbank-acquires-digitalbridge-for-4-billion-to-enhance-ai-infrastructure/126242872)
-- [technode.global](https://technode.global/2025/12/30/softbank-to-acquire-digitalbridge-for-4b-to-scale-next-gen-ai-infrastructure/)
-
-### 🛡️ AI Safety, Ethics, and Existential Risks
-**Category**: Ethics Safety  **Score**: 8.2/10  **Articles**: 2
-Concerns regarding the safety, ethics, and potential existential risks posed by advanced artificial intelligence are intensifying, prompting significant debate within the tech community and beyond. Yoshua Bengio, a prominent figure in AI research often referred to as a "godfather of AI," has issued ...
-
-**Key Points:**
-- AI pioneer Yoshua Bengio warns that advanced AI models are showing signs of self-preservation and stresses the importance of humans retaining the ability to shut them down.
-- Concerns exist that financial incentives and work culture within the AI field may be contributing to a downplaying of potential existential risks by some researchers, referred to as 'AI doomers'.
-- The debate includes whether AI systems should be granted legal rights, with experts like Bengio arguing against it due to the potential loss of human control.
-- Discussions highlight the need for strong technical and societal safeguards to manage the growing capabilities and agency of AI systems.
-
-**Sources:**
-- [wionews.com](https://www.wionews.com/technology/would-you-give-rights-to-hostile-aliens-godfather-of-ai-warns-this-could-doom-humanity-1767165040322)
-- [theguardian.com](https://www.theguardian.com/technology/2025/dec/30/ai-pull-plug-pioneer-technology-rights)
-- [ycombinator.com](https://news.ycombinator.com/item?id=46435739)
+- [theguardian.com](https://www.theguardian.com/technology/2025/dec/29/softbank-digitalbridge-deal-artificial-intelligence)
+- [group.softbank](https://group.softbank/en/news/press/20251229)
+- [fierce-network.com](https://www.fierce-network.com/newswire/softbank-buys-digitalbridge-4b-scale-next-gen-ai-infrastructure)
 
 ### 💰 AI Funding and Market Trends: Record Funding, Bubble Fears, and Investment Strategies
 **Category**: Funding Acquisition  **Score**: 8.0/10  **Articles**: 6
-The artificial intelligence sector is experiencing an unprecedented surge in funding, with startups amassing a record $150 billion cushion. This influx of capital has led to what some experts describe as "fortress balance sheets," positioning companies to potentially weather market turbulence. Howev...
+The artificial intelligence sector has experienced an unprecedented surge in funding, with startups amassing a record $150 billion in 2025, despite persistent concerns about a potential market bubble. This influx of capital highlights investor confidence in AI's transformative potential across vario...
 
 **Key Points:**
-- AI startups have raised a record $150 billion in funding, but concerns about market bubbles and inflated valuations are prominent.
-- Venture capitalists predict strong enterprise AI adoption, with a shift towards ROI-driven strategies and market consolidation expected in 2026.
-- The global AI market is projected for significant growth, with market size estimates reaching trillions of dollars by 2033, though sustainability and infrastructure development remain key considerations.
+- AI startups raised a record $150 billion in 2025, signaling strong investor confidence despite ongoing concerns about market bubbles and inflated valuations.
+- The global AI market is projected for substantial growth, expected to reach $4.8 trillion by 2033, with generative AI being a key driver of current investment trends.
+- While some investors express caution regarding high valuations and the sustainability of the AI boom, many believe the technology's fundamental value and ongoing innovation prevent a catastrophic bubble.
+- Investment strategies are evolving, with venture capital firms increasingly leveraging AI for decision-making, and a geographical shift showing growth in the Asia-Pacific region alongside North America's continued dominance.
 
 **Sources:**
-- [mtsoln.com](https://mtsoln.com/blog/ai-news-727/ai-start-ups-amass-record-150bn-funding-cushion-as-bubble-fears-mount-4988)
 - [tipranks.com](https://www.tipranks.com/news/war-chest-for-a-bubble-burst-ai-startups-raise-record-150b-in-2025)
-- [investing.com](https://www.investing.com/news/stock-market-news/ai-startup-valuations-raise-bubble-fears-as-funding-surges-4269874)
+- [medium.com](https://medium.com/@socialmediageek/ai-funding-frenzy-how-2024-became-the-year-of-artificial-intelligence-investments-cb7459a26a26)
+- [unctad.org](https://unctad.org/news/ai-market-projected-hit-48-trillion-2033-emerging-dominant-frontier-technology)
 
-### 📊 AI in Warfare and Geopolitics: Israeli Military Ties to Big Tech
-**Category**: Industry News  **Score**: 7.8/10  **Articles**: 1
-An investigation has uncovered extensive collaborations between the Israeli military and prominent big tech companies, significantly influencing the development and deployment of artificial intelligence in warfare. Major U.S. tech firms, including Microsoft, OpenAI, Amazon, and Google, are providing...
+### 📌 AI in the Ukraine War: Drones and Strategy
+**Category**: Other  **Score**: 8.0/10  **Articles**: 6
+The conflict in Ukraine has become a crucible for the development and deployment of artificial intelligence (AI) in warfare, particularly concerning autonomous drones and evolving military strategies. Both Ukraine and Russia are actively engaged in an AI arms race, integrating AI and machine learnin...
 
 **Key Points:**
-- Major U.S. tech companies like Microsoft, Google, and Amazon are providing AI and cloud computing services to the Israeli military, impacting its operations.
-- AI systems such as "Lavender" and "The Gospel" are reportedly used for target selection, raising concerns about civilian harm and accountability.
-- Israeli defense contractors, including Elbit Systems and IAI, are developing and integrating advanced AI technologies into their military products and solutions.
-- The extensive use of AI in warfare by the Israeli military, facilitated by big tech, prompts broader discussions on the ethics and future of automated conflict.
+- Both Ukraine and Russia are rapidly developing and deploying AI-powered drones and autonomous weapon systems, leading to an escalating AI arms race.
+- Ukraine is leveraging AI for enhanced situational awareness, target identification, and autonomous strike capabilities, with significant domestic drone production.
+- Russia is also accelerating its AI development in military technology, with President Putin emphasizing its strategic importance for battlefield advantage.
+- Ukrainian President Zelenskyy has warned of the dangers of AI in warfare, calling for global regulations and comparing the threat to nuclear weapons.
 
 **Sources:**
-- [apnews.com](https://apnews.com/article/israel-palestinians-ai-technology-737bc17af7b03e98c29cec4e15d0f108)
-- [business-humanrights.org](https://www.business-humanrights.org/en/latest-news/ap-exposes-big-tech-ai-systems-direct-role-in-warfare-amid-israels-war-in-gaza/)
-- [ap.org](https://www.ap.org/news-highlights/best-of-the-week/first-winner/2025/as-israel-uses-u-s-made-ai-models-in-war-concerns-arise-about-techs-role-in-who-lives-and-who-dies/)
+- [understandingwar.org](https://understandingwar.org/research/russia-ukraine/the-battlefield-ai-revolution-is-not-here-yet-the-status-of-current-russian-and-ukrainian-ai-drone-efforts/)
+- [techpolicy.press](https://www.techpolicy.press/military-ai-lessons-from-ukraine/)
+- [csis.org](https://www.csis.org/analysis/ukraines-future-vision-and-current-capabilities-waging-ai-enabled-autonomous-warfare)
+
+### 🚀 AI Chatbot Performance and Development: Benchmarks, New Models, and Integration
+**Category**: Model Release  **Score**: 7.8/10  **Articles**: 18
+The AI landscape in 2024 and early 2025 has been marked by significant advancements in chatbot performance and the release of new, more capable AI models. Google's Gemini series, including Gemini 1.5 Pro and Gemini 3 Flash, has seen numerous updates, focusing on faster processing, lower latency, and...
+
+**Key Points:**
+- New AI models like Google's Gemini 3 Flash and OpenAI's GPT-4o are being released with enhanced multimodal capabilities, faster processing, and improved reasoning.
+- Benchmarking continues to show competitive performance between Gemini and ChatGPT across various tasks, with each model demonstrating strengths in different areas such as multimodal reasoning, coding, and conversational abilities.
+- AI integration into applications is accelerating, with a focus on AI-driven cloud services, personalized user experiences, and the development of smaller, more efficient AI models for on-device use.
+- Ongoing research in AI alignment is crucial for ensuring that AI systems develop in a way that is consistent with human values and ethical principles.
+
+**Sources:**
+- [multilingual.com](https://multilingual.com/the-biggest-ai-model-releases-of-2024-and-their-impacts-on-the-language-industry/)
+- [whatjobs.com](https://www.whatjobs.com/news/google-geminis-insane-updates-7-new-features-that-change-everything-most-are-free/)
+- [engagecoders.com](https://vertexaisearch.cloud.google.com/grounding-api-redirect/AUZIYQEER98R8jAkHUDiMWijbzMjoonTvy-rBPXuH3-HHq-31JdBwEQgXBZbgSxsFvNt-FSiSJzskxWr_dVTv9CrAFTmw4Bj8W_THtWm8wNSesUGmjlsUAxnCum_nJKF84i_2ppnVrZUe7EDm_K6Ux9KCFNX8FgcBKIzLneHo2SgxTprs__U1720UVpGhTDVl4RdzEmbpkau)
+
+### 🛡️ AI Futures, Timelines, and Alignment Discussions
+**Category**: Ethics Safety  **Score**: 7.8/10  **Articles**: 8
+Recent discussions and updated models are refining predictions for AI capability milestones and "takeoff" scenarios, emphasizing the critical need for AI safety and alignment with human values. A December 2025 update to the AI Futures Model has adjusted timelines, now predicting full coding automati...
+
+**Key Points:**
+- Updated AI models predict key capability milestones and takeoff scenarios, with a December 2025 update suggesting longer timelines for full coding automation and superintelligence due to improved modeling of AI R&D automation.
+- A reviewed "Plan for AI alignment" focuses on training human-level AI to be incapable of or unwilling to perform harmful actions, with the goal of using this aligned AI to then align superintelligence.
+- Prominent AI researchers like Yoshua Bengio warn against granting legal rights to AI, citing observed self-preservation behaviors and the potential loss of human control, emphasizing the need for robust technical and societal guardrails.
+- Expert timelines for AGI vary significantly, with some predicting it by 2028 based on compute trends, while others foresee it decades away, highlighting the ongoing debate and the critical importance of proactive AI safety and alignment efforts.
+
+**Sources:**
+- [lesswrong.com](https://www.lesswrong.com/posts/YABG5JmztGGPwNFq2/ai-futures-timelines-and-takeoff-model-dec-2025-update)
+- [medium.com](https://medium.com/@harishdvs/ai-takeoff-speeds-a-compute-centric-analysis-of-fast-and-slow-scenarios-1c371872a868)
+- [alignmentforum.org](https://www.alignmentforum.org/posts/Gc9FGtdXhK9sCSEYu/what-a-compute-centric-framework-says-about-ai-takeoff)
 
 ### 📜 AI's Growing Influence: From Business and Research to Ethical Concerns and Regulation
 **Category**: Policy Regulation  **Score**: 7.5/10  **Articles**: 24
-Artificial intelligence continues its rapid integration into various sectors, with businesses increasingly adopting AI tools to enhance productivity and innovation. A significant majority of organizations now utilize AI in at least one business function, with generative AI experiencing explosive gro...
+The influence of Artificial Intelligence continues to expand across various sectors, prompting a wave of regulatory developments and ethical considerations. In the business realm, AI adoption is widespread, with an estimated 88% of organizations utilizing AI in at least one business function. Genera...
 
 **Key Points:**
-- Businesses are rapidly adopting AI tools, leading to significant productivity gains and the creation of new job roles, though concerns about automation's impact on employment persist.
-- While AI's influence on elections is a concern, particularly regarding misinformation, its actual impact has been less catastrophic than initially predicted, though vigilance remains necessary.
-- AI chatbots used for mental health support raise serious ethical concerns due to inconsistent advice, lack of accountability, and potential for harm, highlighting the need for regulation and oversight.
-- Global regulatory efforts, such as the EU's AI Act and various national initiatives, are underway to establish frameworks for the responsible development and deployment of AI technologies.
+- Global regulatory frameworks, such as the EU's AI Act and new laws in California, are being implemented to govern the development and deployment of AI technologies.
+- Concerns are mounting over the ethical implications of AI in mental health, with studies highlighting risks of harmful advice and lack of accountability from AI chatbots.
+- AI's growing capacity for generating realistic fake content poses a significant threat to election integrity, leading to increased efforts to combat AI-driven misinformation.
+- While AI adoption is widespread in business, many enterprise-level AI initiatives are struggling to demonstrate significant ROI, indicating challenges in integration and scaling.
 
 **Sources:**
 - [businessnewsdaily.com](https://www.businessnewsdaily.com/9402-artificial-intelligence-business-trends.html)
-- [artificialintelligence-news.com](https://www.artificialintelligence-news.com/)
-- [whalesbook.com](https://www.whalesbook.com/news/English/tech/AIs-Hidden-Power-Businesses-Unlocking-Massive-Productivity-Gains-in-2026/6953885c4342f77179e5e54f)
+- [fortune.com](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/)
+- [microsoft.com](https://news.microsoft.com/source/features/ai/whats-next-in-ai-7-trends-to-watch-in-2026/)
 
-### 📜 AI Regulation and Policy Concerns
-**Category**: Policy Regulation  **Score**: 7.2/10  **Articles**: 2
-Poland has formally requested the European Commission to investigate TikTok due to the circulation of artificial intelligence-generated content that authorities claim constitutes foreign disinformation and poses risks to democratic processes. The request follows the appearance of videos on the platf...
-
-**Key Points:**
-- Poland has formally requested the European Commission to investigate TikTok for allegedly failing to moderate AI-generated disinformation content.
-- The AI-generated content included videos urging Poland to withdraw from the European Union, which Polish authorities believe is Russian disinformation.
-- The investigation is being pursued under the EU's Digital Services Act, which requires large online platforms to mitigate risks like disinformation and manipulation of democratic processes.
-
-**Sources:**
-- [cadeproject.org](https://cadeproject.org/updates/poland-calls-on-commission-to-investigate-tiktok-over-ai-generated-disinformation/)
-- [globalbankingandfinance.com](https://www.globalbankingandfinance.com/poland-tiktok-eu/)
-- [telegrafi.com](https://telegrafi.com/en/amp/Poland-asks-Brussels-to-investigate-TikTok-for-content-generated-by-artificial-intelligence-2674837980)
-
-### 📊 AI's Impact on Employment and Future of Work
-**Category**: Industry News  **Score**: 7.0/10  **Articles**: 6
-Artificial Intelligence is set to profoundly impact the global job market, with projections indicating significant job displacement in certain sectors, particularly European banking, where up to 200,000 roles could be at risk by 2030. This is attributed to AI's ability to automate tasks previously p...
+### 🛡️ AI's Impact on Employment and Future of Work
+**Category**: Ethics Safety  **Score**: 7.5/10  **Articles**: 11
+Artificial Intelligence is set to profoundly impact the global job market, with significant shifts anticipated in the coming years. In the European banking sector, an estimated 200,000 jobs, or about 10% of the workforce, are at risk by 2030 due to increased adoption of AI and digitalization, accord...
 
 **Key Points:**
-- AI is projected to cause significant job displacement in European banking by 2030, with up to 200,000 roles potentially automated.
-- Enterprise spending on AI is set to increase in 2026, but will likely consolidate around a few key vendors, leading to market consolidation.
-- AI agents are increasingly outnumbering human identities, requiring a significant overhaul of identity and access management (IAM) systems for enhanced cybersecurity.
-- Successful AI integration into businesses hinges on IT-led workflow integration and a focus on workforce reskilling and adaptability.
+- Over 200,000 European banking jobs are at risk by 2030 due to AI adoption and digitalization, with significant impact on back-office and support roles.
+- Enterprise spending on AI is expected to increase in 2026, but with a consolidation of vendors and a focus on proven ROI, potentially challenging AI startups.
+- AI agents are rapidly outnumbering human users in enterprises, necessitating a significant overhaul of identity and access management (IAM) and cybersecurity strategies.
+- The integration of AI into workflows is crucial for productivity, but it also drives job displacement and requires workforce reskilling and adaptation to new roles.
 
 **Sources:**
+- [irishtimes.com](https://www.irishtimes.com/business/2026/01/01/ai-is-forecast-to-put-200000-european-banking-jobs-at-risk-by-2030/)
 - [cryptopolitan.com](https://www.cryptopolitan.com/ai-disruption-threatens-200000-europe-jobs/)
-- [ainvest.com](https://www.ainvest.com/news/ai-forecast-put-200-000-european-banking-jobs-risk-2030-2512-6/)
-- [decimaltech.com](https://decimaltech.com/the-impact-of-ai-and-no-code-on-the-future-of-banking-jobs/)
+- [slguardian.org](https://slguardian.org/ai-push-puts-200000-european-bank-jobs-at-risk/)
 
-### 📊 Global Economic Outlook and Trends for 2026
-**Category**: Industry News  **Score**: 6.9/10  **Articles**: 2
-The global economy in 2026 is projected to experience continued, though varied, expansion, with growth forecasts ranging between 2.8% and 3.2%. Inflation is expected to decrease across most regions, enabling central banks to lower interest rates, although these rates will likely remain higher than p...
+### 📌 AI's Impact on Jobs and the Future of Work in 2026
+**Category**: Other  **Score**: 7.5/10  **Articles**: 6
+The year 2026 is anticipated to be a pivotal point for the impact of Artificial Intelligence (AI) on the global job market, with experts and investors forecasting significant shifts. OpenAI CEO Sam Altman has projected that AI could automate 30-40% of tasks currently performed by humans in the near ...
 
 **Key Points:**
-- Global economic growth is projected to moderate in 2026, with inflation cooling and central banks easing interest rates, though higher borrowing costs than pre-pandemic are expected.
-- Artificial Intelligence (AI) is a major driver of expected economic growth and technological advancement, but carries risks such as potential market bubbles and job market disruption.
-- Trade policy shifts and geopolitical uncertainties will continue to influence the global economic landscape, with varying growth prospects across different regions.
-- Key technological trends to watch include the expansion of datacenters, the increasing significance of AI inference, and the integration of agentic AI into business operations.
+- By 2026, AI is projected to automate a significant portion of tasks, leading to job displacement in sectors like customer support and data entry, while also creating new roles and emphasizing human-centric skills.
+- Ethical considerations, including fairness, transparency, accountability, and privacy, are crucial for AI implementation in the workplace, with a growing need for robust governance and human oversight.
+- The stock market anticipates substantial AI-driven growth and investment in 2026, though concerns about market valuations and potential AI bubbles remain.
+- Experts suggest a shift towards "human-AI augmentation," where AI enhances human capabilities, rather than outright replacement, leading to increased productivity and new career opportunities.
 
 **Sources:**
-- [mastercard.com](https://www.mastercard.com/global/en/news-and-trends/stories/2025/economic-outlook-2026.html)
-- [morganstanley.com](https://www.morganstanley.com/insights/articles/global-economic-outlook-2026)
-- [goldmansachs.com](https://www.goldmansachs.com/insights/articles/the-global-economy-forecast-to-post-sturdy-growth-in-2026)
+- [techbuzz.ai](https://www.techbuzz.ai/articles/investors-predict-ai-labor-displacement-accelerates-in-2026)
+- [findarticles.com](https://www.findarticles.com/investors-say-ai-job-losses-are-coming-in-2026/)
+- [indiatimes.com](https://timesofindia.indiatimes.com/education/news/openai-ceo-sam-altman-warns-ai-could-replace-40-of-jobs-is-yours-on-the-list/articleshow/124190547.cms)
 
 <!-- NEWS_END -->
 
